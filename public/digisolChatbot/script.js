@@ -4,6 +4,7 @@ let container = document.querySelector(".container");
 let chatContainer = document.querySelector(".chat-container");
 let userMessage = null;
 
+
 async function getWebsiteContext() {
   const pages = [
     "/index.html",
@@ -31,6 +32,7 @@ async function getWebsiteContext() {
   return context;
 }
 
+
 function createChatbox(html, classname) {
   let div = document.createElement("div");
   div.classList.add(classname);
@@ -38,15 +40,16 @@ function createChatbox(html, classname) {
   return div;
 }
 
+
 async function getApiResponse(aiChatbox) {
   let textElement = aiChatbox.querySelector(".text");
 
   try {
     const context = await getWebsiteContext();
-    const API_BASE =
-      window.location.hostname === "localhost"
-        ? "http://localhost:5000"
-        : "https://digisolutions-production.up.railway.app";
+const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://digisolutions-production.up.railway.app";
 
     const response = await fetch(`${API_BASE}/api/chat`, {
       method: "POST",
@@ -55,10 +58,11 @@ async function getApiResponse(aiChatbox) {
     });
 
     const data = await response.json();
-    console.log("API data:", data);
+    console.log(data);
 
-    // ✅ Updated to match backend response
-    const apiResponse = data?.text || "Sorry, I couldn’t get that.";
+    const apiResponse =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Sorry, I couldn’t get that.";
     textElement.innerText = apiResponse;
   } catch (error) {
     console.log(error);
@@ -87,7 +91,7 @@ function showLoading() {
 // ✅ Main button click handler
 btn.addEventListener("click", () => {
   userMessage = promptmsg.value.trim();
-  console.log("User message:", userMessage);
+  console.log(userMessage);
 
   if (userMessage === "") {
     container.style.display = "flex";
