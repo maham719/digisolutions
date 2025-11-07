@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+      
+
+        <h1>Welcome to Digify Solutions!</h1>
+        <h2>Let’s find the right solution for you</h2>
+    </div>
+      <i class="ri-close-fill" id="closeBtn"></i>
+    <div class="chat-container">
+        <!-- <div class="user-chatbox">
+            <div class="img">
+                <img src="user.png" alt="" width="40px" >
+            </div>
+            <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo illo nobis, eaque rerum unde velit, recusandae id nam molestias consequuntur enim odit numquam fugiat, fugit perferendis minus dolorum esse laudantium.
+      </p>
+        </div> -->
+        <!-- <div class="ai-chatbox">
+                <div class="img">
+                <img src="ai.png" alt="" width="50px">
+            </div>
+            <div class="text-box">
+            <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo illo nobis, eaque rerum unde velit, recusandae id nam molestias consequuntur enim </p>
+            <img src="/load-32_256.gif" alt="" class="loading" width="50">
+            </div>
+        </div> -->
+    </div>
+    <div class="prompt-area">
+        <input type="text" id="prompt" placeholder="Ask Something...">
+        <button id="btn"><i class="ri-send-plane-fill"></i></button>
+    </div>
+    <script src="script.js"></script>
+    <script>
+  const closeBtn = document.getElementById("closeBtn");
+  closeBtn.addEventListener("click", () => {
+    // Tell parent page to hide iframe
+    window.parent.postMessage("closeChat", "*");
+  });
+</script>
+</body>
+</html>

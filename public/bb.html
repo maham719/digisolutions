@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Detail Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-center">Bank Account Details</h2>
+              <form>
+                <div class="form-group">
+                  <label for="account-number">Account Number</label>
+                  <input type="text" id="account-number" class="form-control" placeholder="Enter account number">
+                </div>
+                <div class="form-group">
+                  <label for="balance">Balance</label>
+                  <input type="text" id="balance" class="form-control" placeholder="Enter balance">
+                </div>
+                <button type="button" id="check-balance" class="btn btn-primary btn-block">Check Balance</button>
+              </form>
+              <div id="result" class="mt-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-center">Transaction History</h2>
+              <ul class="list-group">
+                <li class="list-group-item">Transaction 1: $100</li>
+                <li class="list-group-item">Transaction 2: -$50</li>
+                <li class="list-group-item">Transaction 3: $200</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    document.getElementById('check-balance').addEventListener('click', function() {
+      var accountNumber = document.getElementById('account-number').value;
+      var balance = document.getElementById('balance').value;
+      var resultElement = document.getElementById('result');
+
+      resultElement.innerHTML = `
+        <h4>Account Number: ${accountNumber}</h4>
+        <h4>Balance: $${balance}</h4>
+      `;
+    });
+  </script>
+</body>
+</html>
