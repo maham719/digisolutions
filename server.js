@@ -13,9 +13,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors({
-  origin: "*"
-}));
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // ✅ Serve static frontend files from /public
@@ -57,15 +55,20 @@ User: ${userMessage}
       }
     );
 
-    res.json(response.data);
+    // ✅ Extract the text from Gemini API response
+    const apiText =
+      response.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Sorry, I cannot get that.";
+
+    // ✅ Send only the extracted text to frontend
+    res.json({ text: apiText });
   } catch (error) {
     console.error("Gemini API error:", error.response?.data || error.message);
-    res.status(500).json({ error: "Error communicating with Gemini API" });
+    res.status(500).json({ text: "Sorry, I cannot get that" });
   }
 });
 
 // ✅ Fallback route — handles "Cannot GET /" on reload
-// ✅ Fallback route (fixes “Cannot GET /” safely)
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
