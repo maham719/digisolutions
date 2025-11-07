@@ -2,14 +2,24 @@ import express from "express";
 import dotenv from "dotenv";
 import axios from "axios";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
 const app = express();
+
+// Get correct __dirname (since you're using ES modules)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public")); // serve HTML, CSS, JS
 
+// ✅ Serve static files from the public folder
+app.use(express.static(path.join(__dirname, "public")));
+
+// ✅ Gemini API route
 app.post("/api/chat", async (req, res) => {
   const { userMessage, context } = req.body;
 
@@ -52,7 +62,13 @@ User: ${userMessage}
   }
 });
 
-const PORT = 5000;
+// ✅ Fallback route (fixes “Cannot GET /”)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`🚀 Server running at http://localhost:${PORT}`)
 );
+
