@@ -9,17 +9,17 @@ dotenv.config();
 
 const app = express();
 
-// Get correct __dirname (since you're using ES modules)
+// ✅ Get correct __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
 
-// ✅ Serve static files from the public folder
+// ✅ Serve static frontend files from /public
 app.use(express.static(path.join(__dirname, "public")));
 
-// ✅ Gemini API route
+// ✅ Gemini API proxy route
 app.post("/api/chat", async (req, res) => {
   const { userMessage, context } = req.body;
 
@@ -62,13 +62,12 @@ User: ${userMessage}
   }
 });
 
-// ✅ Fallback route (fixes “Cannot GET /”)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// ✅ Fallback route — handles "Cannot GET /" on reload
+// ✅ Fallback route (fixes “Cannot GET /” safely)
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 
+// ✅ Use environment port for deployment (Railway, Vercel, etc.)
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`🚀 Server running at http://localhost:${PORT}`)
-);
-
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
