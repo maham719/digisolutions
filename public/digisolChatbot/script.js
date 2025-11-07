@@ -46,8 +46,12 @@ async function getApiResponse(aiChatbox) {
 
   try {
     const context = await getWebsiteContext();
+const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://digisolutions-production.up.railway.app";
 
-    const response = await fetch("https://digisolutions-production.up.railway.app/api/chat", {
+    const response = await fetch(`${API_BASE}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userMessage, context }),
