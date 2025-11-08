@@ -7,15 +7,16 @@ let userMessage = null;
 
 async function getWebsiteContext() {
   const pages = [
-    "/index.html",
-    "/aboutus.html",
-    "/pricing.html",
-    "/app-development.html",
-    "/branding.html",
-    "/contact-us.html",
-    "/logo-design.html",
-    "/portfolio.html",
-    "/web-design.html",
+      "https://www.digifysol.com/index.html",
+  "https://www.digifysol.com/aboutus.html",
+  "https://www.digifysol.com/pricing.html",
+  "https://www.digifysol.com/web-design.html",
+  "https://www.digifysol.com/app-development.html",
+  "https://www.digifysol.com/branding.html",
+  "https://www.digifysol.com/contact-us.html",
+  "https://www.digifysol.com/logo-design.html",
+  "https://www.digifysol.com/portfolio.html",
+
   ];
 
   let context = "";
